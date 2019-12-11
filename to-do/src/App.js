@@ -15,6 +15,7 @@ class App extends React.Component {
     };
 
     this.deleteTask = this.deleteTask.bind(this);
+    this.setUpdate=this.setUpdate.bind(this)
   }
 
   handleInput = e => {
@@ -48,6 +49,18 @@ class App extends React.Component {
       items: filteredTask
     });
   }
+
+  setUpdate(text, key) {
+    const item = this.state.items;
+    item.map(item => {
+      if (item.key === key) {
+        item.text = text;
+      }
+    });
+    this.setState({
+      items:item
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -62,7 +75,11 @@ class App extends React.Component {
             <button type="submit">ADD TASK</button>
           </form>
         </header>
-        <ListTask items={this.state.items} deleteTask={this.deleteTask} />
+        <ListTask
+          items={this.state.items}
+          deleteTask={this.deleteTask}
+          setUpdate={this.setUpdate}
+        />
       </div>
     );
   }

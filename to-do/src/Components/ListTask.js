@@ -7,11 +7,17 @@ function ListTask(props) {
   const listItems = items.map(item => {
     return (
       <div className="list" key={item.key}>
-        <p>{item.text}</p>
+        <p>
+        <input type="text" 
+        id ={item.key} 
+        value={item.text}
+        onChange={(e)=>{
+            props.setUpdate(e.target.value, item.key)
+        }}/>
         <span>
-            
+        <button className="btn" onClick={()=>props.deleteTask(item.key)}>CLEAR</button>
         </span>
-        <button className="btn" onClick={()=>props.deleteTask(item.key)}>CLEAR TASK</button>
+        </p>
       </div>
     );
   });
