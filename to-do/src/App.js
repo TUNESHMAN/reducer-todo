@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ListTask from './Components/ListTask'
+import ListTask from "./Components/ListTask";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +13,8 @@ class App extends React.Component {
         key: ""
       }
     };
+
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleInput = e => {
@@ -39,6 +41,13 @@ class App extends React.Component {
       });
     }
   };
+
+  deleteTask(key) {
+    const filteredTask = this.state.items.filter(item => item.key !== key);
+    this.setState({
+      items: filteredTask
+    });
+  }
   render() {
     return (
       <div className="App">
@@ -53,7 +62,7 @@ class App extends React.Component {
             <button type="submit">ADD TASK</button>
           </form>
         </header>
-        <ListTask items={this.state.items}/>
+        <ListTask items={this.state.items} deleteTask={this.deleteTask} />
       </div>
     );
   }
